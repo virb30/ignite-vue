@@ -1,22 +1,24 @@
 <template>
   <div>
-    <section class="main">
-      <h1>Hello Vue do Zero!</h1>
-    </section>
-
-    <h1>Tô fora!</h1>
+    <repository-list />
   </div>
 </template>
 
 
 <script>
+import RepositoryList from './components/RepositoryList.vue';
 import './styles/global.scss';
-export default {}
+export default {
+  components: {
+    RepositoryList
+  }
+}
 </script>
 
 
 <style lang="scss">
-.main {
+.main 
+{
   h1 {
     font-size: 80px;
   }
