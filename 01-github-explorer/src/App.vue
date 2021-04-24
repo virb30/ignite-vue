@@ -5,14 +5,15 @@
 </template>
 
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import RepositoryList from './components/RepositoryList.vue';
 import './styles/global.scss';
-export default {
+export default Vue.extend({
   components: {
     RepositoryList
   }
-}
+})
 </script>
 
 

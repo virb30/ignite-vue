@@ -8,22 +8,23 @@
     </section>
 </template>
 
-<script>
-import RepositoryItem from "./RepositoryItem.vue"
+<script lang="ts">
+import Vue from 'vue';
+import RepositoryItem from "./RepositoryItem.vue";
+import {Repository} from '../interfaces/Repository';
 
-export default {
+
+export default Vue.extend({
   components: { RepositoryItem },
-  data(){
-    return {
-      repositories: []
-    }
-  },
+  data: () => ({
+      repositories: [] as Repository[],
+  }),
   mounted(){
     fetch('https://api.github.com/orgs/rocketseat/repos')
       .then(response => response.json())
       .then(data => this.repositories = data);
   }
-}
+})
 </script>
 
 <style lang="scss">

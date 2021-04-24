@@ -9,15 +9,15 @@
     </li>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+import { Repository } from '../interfaces/Repository';
+
+export default Vue.extend({ 
   props: {
-    repository: {
-      type: Object,
-      default: null
-    }
+    repository: Object as () => Repository
   }
-}
+});
 </script>
 
 <style>

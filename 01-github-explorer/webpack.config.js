@@ -7,16 +7,35 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   mode: isDevelopment? 'development': 'production',
   devtool: isDevelopment? 'eval-source-map':'source-map',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
+  resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js',
+      '@': path.resolve('src')
+    }
+  },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          hotReload: true,
+        }
       },
       {
-        test: /\.js/,
-        use: 'babel-loader'
+        test: /\.(j|t)s/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'babel-loader'},
+          { 
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+              transpileOnly: true
+            }
+          }
+        ]
       },
       {
         test: /\.css/,
