@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   mode: isDevelopment? 'development': 'production',
   devtool: isDevelopment? 'eval-source-map':'source-map',
-  entry: path.resolve(__dirname, 'src', 'index.ts'),
+  entry: path.resolve(__dirname, 'src', 'main.ts'),
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
