@@ -27,6 +27,7 @@
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
+      "@nuxtjs/auth-next",
       "@types/node",
       "@types/vue-feather-icons",
       "nuxt-stripe-module"

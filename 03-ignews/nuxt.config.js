@@ -41,6 +41,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -48,4 +49,20 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // serverMiddleware: [{ path: '/api', handler: '~/api/index.ts' }],
+
+  auth: {
+    redirect: {
+      callback: '/api/auth/callback',
+    },
+    strategies: {
+      github: {
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET,
+        scope: 'read:user',
+        redirectUri: process.env.GITHUB_REDIRECT_URI,
+      },
+    },
+  },
 }

@@ -1,10 +1,20 @@
 <template>
-  <button v-if="isUserLoggedIn" type="button" :class="$style.signInButton">
+  <button
+    v-if="isUserLoggedIn"
+    type="button"
+    :class="$style.signInButton"
+    @click="handleLogout"
+  >
     <FontAwesomeIcon color="#04d361" :icon="['fab', 'github']" />
     Vinícius Bôscoa
     <XIcon color="#737380" :class="$style.closeIcon" />
   </button>
-  <button v-else type="button" :class="$style.signInButton">
+  <button
+    v-else
+    type="button"
+    :class="$style.signInButton"
+    @click="handleLogin"
+  >
     <FontAwesomeIcon color="#eba417" :icon="['fab', 'github']" />
     Sign in with github
   </button>
@@ -19,19 +29,33 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faGithub)
 
-interface Data {
+interface Computed {
   isUserLoggedIn: boolean
 }
 
-export default Vue.extend<Data, unknown, unknown, []>({
+interface Methods {
+  handleLogin: () => Promise<void>
+  handleLogout: () => Promise<void>
+}
+
+export default Vue.extend<unknown, Methods, Computed, []>({
   components: {
     XIcon,
     FontAwesomeIcon,
   },
-  data() {
-    return {
-      isUserLoggedIn: true,
-    }
+  computed: {
+    isUserLoggedIn() {
+      return this.$auth.loggedIn
+    },
+  },
+  methods: {
+    async handleLogin() {
+      const response = await this.$auth.loginWith('github')
+      console.log(response)
+    },
+    async handleLogout() {
+      await this.$auth.logout()
+    },
   },
 })
 </script>
