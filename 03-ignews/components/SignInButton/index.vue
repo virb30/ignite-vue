@@ -50,8 +50,7 @@ export default Vue.extend<unknown, Methods, Computed, []>({
   },
   methods: {
     async handleLogin() {
-      const response = await this.$auth.loginWith('github')
-      console.log(response)
+      await this.$auth.loginWith('github', { data: { scope: 'read:user' } })
     },
     async handleLogout() {
       await this.$auth.logout()

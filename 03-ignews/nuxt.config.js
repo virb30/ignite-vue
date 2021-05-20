@@ -34,6 +34,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    'nuxt-typed-vuex',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -50,18 +51,18 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  // serverMiddleware: [{ path: '/api', handler: '~/api/index.ts' }],
-
   auth: {
     redirect: {
       callback: '/api/auth/callback',
+      home: '/',
     },
+    watchLoggedIn: true,
     strategies: {
       github: {
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
         scope: 'read:user',
-        redirectUri: process.env.GITHUB_REDIRECT_URI,
+        redirectUri: process.env.GITHUB_CALLBACK_URL,
       },
     },
   },

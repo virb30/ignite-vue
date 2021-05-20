@@ -30,7 +30,8 @@
       "@nuxtjs/auth-next",
       "@types/node",
       "@types/vue-feather-icons",
-      "nuxt-stripe-module"
+      "nuxt-stripe-module",
+      "passport-github2"
     ]
   },
   "exclude": [

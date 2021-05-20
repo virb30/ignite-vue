@@ -19,9 +19,10 @@
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "core-js": "^3.9.1",
-    "express": "^4.17.1",
+    "faunadb": "^4.2.0",
     "nuxt": "^2.15.3",
     "nuxt-stripe-module": "^3.2.0",
+    "nuxt-typed-vuex": "^0.2.0",
     "stripe": "^8.148.0",
     "vue-feather-icons": "^5.1.0"
   },
