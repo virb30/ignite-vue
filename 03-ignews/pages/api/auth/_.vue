@@ -1,5 +1,5 @@
 <template>
-  <div>Signed in successfully. Redirecting...</div>
+  <div>Redirecting...</div>
 </template>
 
 <script lang="ts">

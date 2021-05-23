@@ -46,19 +46,31 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: '/api',
+    withCredentials: true,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  publicRuntimeConfig: {
+    stripeSuccessUrl: process.env.STRIPE_SUCCESS_URL,
+    stripeCancelUrl: process.env.STRIPE_CANCEL_URL,
+  },
+
+  serverMiddleware: [{ path: '/api', handler: '~/server-middleware/index.ts' }],
 
   auth: {
     redirect: {
       callback: '/api/auth/callback',
       home: '/',
+      logout: '/',
     },
     watchLoggedIn: true,
     strategies: {
       github: {
+        scheme: '~/schemes/Oauth2CookieScheme',
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
         scope: 'read:user',
