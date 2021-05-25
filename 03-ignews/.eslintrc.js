@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'off',
     camelcase: 'off',
+    'no-case-declarations': 'off',
   },
 }

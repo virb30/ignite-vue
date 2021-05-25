@@ -63,8 +63,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       cancel_url: process.env.STRIPE_CANCEL_URL || '',
     })
 
-    return res.end(JSON.stringify({ sessionId: stripeCheckoutSession.id }))
+    return res.json({ sessionId: stripeCheckoutSession.id })
   } else {
-    res.writeHead(405, { Allow: 'POST' }).end('Method not allowed')
+    res.setHeader('Allow', 'POST')
+    res.status(405).end('Method not allowed')
   }
 }
