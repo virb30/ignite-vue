@@ -18,6 +18,7 @@
     "@nuxtjs/auth-next": "^5.0.0-1620773067.c356fed",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@prismicio/client": "^5.0.0",
     "@stripe/stripe-js": "^1.15.0",
     "@types/jsonwebtoken": "^8.5.1",
     "cookie-parser": "^1.4.5",
@@ -28,6 +29,7 @@
     "nuxt": "^2.15.3",
     "nuxt-stripe-module": "^3.2.0",
     "nuxt-typed-vuex": "^0.2.0",
+    "prismic-dom": "^2.2.5",
     "stripe": "^8.148.0",
     "vue-feather-icons": "^5.1.0"
   },
@@ -37,6 +39,7 @@
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@types/cookie-parser": "^1.4.2",
+    "@types/prismic-dom": "^2.1.1",
     "@types/vue-feather-icons": "^5.0.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.22.0",
