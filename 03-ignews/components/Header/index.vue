@@ -3,8 +3,8 @@
     <div :class="$style.headerContent">
       <img src="../../assets/images/logo.svg" alt="ig.news" />
       <nav>
-        <a :class="$style.active">Home</a>
-        <a>Posts</a>
+        <NuxtLink exact to="/" :active-class="$style.active">Home</NuxtLink>
+        <NuxtLink to="/posts" :active-class="$style.active">Posts</NuxtLink>
       </nav>
 
       <SignInButton />
