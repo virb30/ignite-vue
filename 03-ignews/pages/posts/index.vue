@@ -1,7 +1,7 @@
 <template>
 	<main :class="$style.container">
 		<div :class="$style.posts">
-			<NuxtLink v-for="post in posts" :key="post.slug" :to="`/posts/${post.slug}`">
+			<NuxtLink v-for="post in posts" :key="post.slug" :to="`/posts/preview/${post.slug}`">
 				<time>{{ post.updatedAt }}</time>
 				<strong>{{ post.title }}</strong>
 				<p>{{ post.excerpt }}</p>
