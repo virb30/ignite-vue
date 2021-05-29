@@ -17,12 +17,14 @@ interface SubscribeButtonProps {
 	priceId: string
 }
 
-interface Computed {
-	session: {
-		user: {
-			activeSubscription: object | null
-		}
+interface Session {
+	user: {
+		activeSubscription: object | null
 	}
+}
+
+interface Computed {
+	session: Session | null;
 }
 
 interface Methods {
@@ -48,7 +50,7 @@ export default Vue.extend<unknown, Methods, Computed, SubscribeButtonProps>({
 				return;
 			}
 
-			if (this.session.user.activeSubscription) {
+			if (this.session?.user.activeSubscription) {
 				this.$router.push('/posts');
 				return;
 			}

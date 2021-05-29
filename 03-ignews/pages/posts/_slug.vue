@@ -43,7 +43,7 @@ export default Vue.extend<Data, unknown, unknown, []>({
 
 		const session = getSession(String($auth.$storage.getUniversal('_session')));
 
-		if (!session.user.activeSubscription) {
+		if (!session?.user.activeSubscription) {
 			redirect(302, '/');
 		}
 

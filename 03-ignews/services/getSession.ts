@@ -9,6 +9,10 @@ interface Session {
 	}
 }
 
-export function getSession (session:string): Session {
-	return jwt.verify(session, process.env.SECRET_KEY || '') as Session;
+export function getSession (session:string): Session | null {
+	try {
+		return jwt.verify(session, process.env.SECRET_KEY || '') as Session;
+	} catch {
+		return null;
+	}
 }

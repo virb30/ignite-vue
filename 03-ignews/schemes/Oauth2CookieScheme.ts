@@ -38,6 +38,7 @@ export default class Oauth2CookieScheme extends Oauth2Scheme {
 	}
 
 	async setSession () {
+		await super.fetchUser();
 		const user = this.$auth.user as Record<
 		'name' | 'email' | 'avatar_url',
 		string
@@ -61,8 +62,7 @@ export default class Oauth2CookieScheme extends Oauth2Scheme {
 	}
 
 	async fetchUser () {
-		await super.fetchUser();
-		this.setSession();
+		await this.setSession();
 	}
 
 	logout () {
