@@ -70,4 +70,4 @@ export default Vue.extend<Data, unknown, unknown, []>({
 });
 </script>
 
-<style lang="scss" scoped module src="./post.module.scss"></style>
+<style lang="scss" src="./post.module.scss" module></style>
