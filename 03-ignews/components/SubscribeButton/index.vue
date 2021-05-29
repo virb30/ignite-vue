@@ -1,51 +1,70 @@
 <template>
-  <button
-    type="button"
-    :class="$style.subscribeButton"
-    @click="handleSubscribe"
-  >
-    Subscribe now
-  </button>
+	<button
+		type="button"
+		:class="$style.subscribeButton"
+		@click="handleSubscribe"
+	>
+		Subscribe now
+	</button>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { getStripeJs } from '~/services/stripe-js'
+import Vue from 'vue';
+import { getStripeJs } from '~/services/stripe-js';
+import { getSession } from '~/services/getSession';
 
 interface SubscribeButtonProps {
-  priceId: string
+	priceId: string
+}
+
+interface Computed {
+	session: {
+		user: {
+			activeSubscription: object | null
+		}
+	}
 }
 
 interface Methods {
-  handleSubscribe: () => Promise<void>
+	handleSubscribe: () => Promise<void>
 }
 
-export default Vue.extend<unknown, Methods, unknown, SubscribeButtonProps>({
-  props: {
-    priceId: {
-      type: String,
-      default: '',
-    },
-  },
-  methods: {
-    async handleSubscribe() {
-      if (!this.$auth.loggedIn) {
-        this.$auth.loginWith('github')
-        return
-      }
+export default Vue.extend<unknown, Methods, Computed, SubscribeButtonProps>({
+	props: {
+		priceId: {
+			type: String,
+			default: '',
+		},
+	},
+	computed: {
+		session () {
+			return getSession(this.$auth.$storage.getUniversal('_session') as string);
+		},
+	},
+	methods: {
+		async handleSubscribe () {
+			if (!this.$auth.loggedIn) {
+				this.$auth.loginWith('github');
+				return;
+			}
 
-      try {
-        const response = await this.$axios.post('/subscribe')
-        const { sessionId } = response.data
-        const stripe = await getStripeJs()
+			if (this.session.user.activeSubscription) {
+				this.$router.push('/posts');
+				return;
+			}
 
-        await stripe?.redirectToCheckout({ sessionId })
-      } catch (err) {
-        alert(err.message)
-      }
-    },
-  },
-})
+			try {
+				const response = await this.$axios.post('/subscribe');
+				const { sessionId } = response.data;
+				const stripe = await getStripeJs();
+
+				await stripe?.redirectToCheckout({ sessionId });
+			} catch (err) {
+				alert(err.message);
+			}
+		},
+	},
+});
 </script>
 
 <style module lang="scss" src="./styles.module.scss"></style>

@@ -1,38 +1,43 @@
-import { getterTree, actionTree } from 'typed-vuex'
-import { Context } from '@nuxt/types'
-import { Auth } from '@nuxtjs/auth-next'
-import { saveUser } from '~/services/fauna/saveUser'
+import { actionTree, getAccessorType } from 'typed-vuex';
+import { Context } from '@nuxt/types';
+import { Auth } from '@nuxtjs/auth-next';
+import { saveUser } from '~/services/fauna/saveUser';
+import { State } from './types';
 
-export const state = () => ({
-  auth: {} as Auth,
-})
+export const state = (): State => ({
+	auth: {} as Auth,
+});
 
 export type RootState = ReturnType<typeof state>
 
-export const getters = getterTree(state, {
-  getUser: (state) => {
-    return state.auth.user
-  },
-})
+export const getters = {
+	getUser: (state: RootState) => state.auth.user,
+};
 
 export const actions = actionTree(
-  { state, getters },
-  {
-    nuxtServerInit({ state, dispatch }, { store }: Context) {
-      store.watch(
-        (state, getters) => {
-          return getters.getUser
-        },
-        async (user, oldUser) => {
-          if (user !== oldUser) {
-            await saveUser(user)
-          }
-        },
-        {
-          deep: true,
-          immediate: true,
-        }
-      )
-    },
-  }
-)
+	{ getters, state },
+	{
+		nuxtServerInit ({ state, dispatch }, { store }: Context) {
+			store.watch(
+				(state, getters) => {
+					return getters.getUser;
+				},
+				async (user, oldUser) => {
+					if (user !== oldUser) {
+						await saveUser(user);
+					}
+				},
+				{
+					deep: true,
+					immediate: true,
+				},
+			);
+		},
+	},
+);
+
+export const accessorType = getAccessorType({
+	actions,
+	getters,
+	state,
+});

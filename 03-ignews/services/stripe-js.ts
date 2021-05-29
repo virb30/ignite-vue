@@ -1,9 +1,9 @@
-import { loadStripe } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js';
 
-export async function getStripeJs() {
-  const stripeJs = await loadStripe(
-    process.env.NUXT_ENV_STRIPE_PUBLIC_KEY || ''
-  )
+export async function getStripeJs () {
+	const stripeJs = await loadStripe(
+		process.env.NUXT_ENV_STRIPE_PUBLIC_KEY || '',
+	);
 
-  return stripeJs
+	return stripeJs;
 }
